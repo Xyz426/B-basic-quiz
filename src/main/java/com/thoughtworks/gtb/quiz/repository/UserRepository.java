@@ -11,7 +11,7 @@ import java.util.List;
 public class UserRepository {
     List<User> users = new ArrayList<>();
     {
-        users.add(User.builder().id(1l).age(16)
+        users.add(User.builder().id(1l).age(16l)
                 .name("KAMIL")
                 .avatar("https://inews.gtimg.com/newsapp_match/0/3581582328/0")
                 .description("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, non, dolorem, cumque distinctio magni quam expedita velit laborum sunt amet facere tempora ut fuga aliquam ad asperiores voluptatem dolorum! Quasi.")
@@ -28,5 +28,11 @@ public class UserRepository {
         if(users.size() < id)
             return null;
         return users.get(id - 1);
+    }
+
+    public User addUser(User user) {
+        user.setId((long) (users.size() + 1));
+        users.add(user);
+        return user;
     }
 }

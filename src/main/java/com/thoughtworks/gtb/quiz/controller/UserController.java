@@ -3,12 +3,12 @@ package com.thoughtworks.gtb.quiz.controller;
 import com.thoughtworks.gtb.quiz.domain.Education;
 import com.thoughtworks.gtb.quiz.domain.User;
 import com.thoughtworks.gtb.quiz.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,5 +27,9 @@ public class UserController {
     @GetMapping(path = "/{id}/educations")
     public ResponseEntity<List<Education>> getEducationsByUserId(@PathVariable int id){
         return ResponseEntity.ok(userService.getEducationsByUserId(id));
+    }
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody @Valid User user){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
     }
 }

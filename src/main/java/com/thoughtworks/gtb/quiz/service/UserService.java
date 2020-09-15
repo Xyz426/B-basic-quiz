@@ -32,4 +32,8 @@ public class UserService {
         }
         return user.getEducationList();
     }
+
+    public User addUser(User user) {
+        return userRepository.addUser(user);
+    }
 }
