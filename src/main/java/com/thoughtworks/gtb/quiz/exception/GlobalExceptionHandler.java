@@ -15,4 +15,10 @@ public class GlobalExceptionHandler {
         ErrorResult errorResult = new ErrorResult(new Date(),404,"Not Found",e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
+
+    @ExceptionHandler(UserEducationsIsNotExistException.class)
+    public ResponseEntity<ErrorResult> handleUserException(UserEducationsIsNotExistException e) {
+        ErrorResult errorResult = new ErrorResult(new Date(),404,"Not Found",e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
+    }
 }
