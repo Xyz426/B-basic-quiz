@@ -19,7 +19,7 @@ public class User {
     private Long id;
 
     @NotNull(message = "用户名不为空")
-    @Size(min = 1, max = 16, message = "用户名不合法")
+    @Size(min = 1, max = 128, message = "用户名不合法")
     private String name;
 
     @NotNull(message = "年龄不为空")
@@ -27,10 +27,10 @@ public class User {
     private Long age;
 
     @NotNull(message = "链接不为空")
-    @Size(min = 1, max = 64, message = "链接长度不合法")
+    @Size(min = 8, max = 512, message = "链接长度不合法")
     private String avatar;
 
-    @Size(min = 0, max = 128, message = "个人介绍长度不合法")
+    @Size(max = 1024, message = "个人介绍长度不合法")
     private String description;
 
     @JsonIgnore

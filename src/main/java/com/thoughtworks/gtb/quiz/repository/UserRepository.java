@@ -32,7 +32,13 @@ public class UserRepository {
 
     public User addUser(User user) {
         user.setId((long) (users.size() + 1));
+        user.setEducationList(new ArrayList<>());
         users.add(user);
         return user;
+    }
+
+    public Education addUserEducation(int id, Education education) {
+        users.get(id - 1).getEducationList().add(education);
+        return education;
     }
 }

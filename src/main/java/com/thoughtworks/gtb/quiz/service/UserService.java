@@ -36,4 +36,9 @@ public class UserService {
     public User addUser(User user) {
         return userRepository.addUser(user);
     }
+
+    public Education addUserEducation(int id, Education education) {
+        getUserById(id);
+        return userRepository.addUserEducation(id,education);
+    }
 }

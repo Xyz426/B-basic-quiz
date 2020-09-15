@@ -32,4 +32,9 @@ public class UserController {
     public ResponseEntity<User> addUser(@RequestBody @Valid User user){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(user));
     }
+
+    @PostMapping(path = "/{id}/educations")
+    public ResponseEntity<Education> addUserEducation(@PathVariable int id,@RequestBody @Valid Education education){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUserEducation(id,education));
+    }
 }
