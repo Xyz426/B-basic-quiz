@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Date;
 
+// GTB: - 404, Not Found 这些尽量别 hard code 了，HttpStatus 下有常量可以用
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserIsNotExistException.class)

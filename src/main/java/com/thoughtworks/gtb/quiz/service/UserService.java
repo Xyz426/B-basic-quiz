@@ -27,6 +27,7 @@ public class UserService {
 
     public List<Education> getEducationsByUserId(int id) {
         User user = getUserById(id);
+        // GTB: - 没有教育经历返回 [] 就可以了，不需要抛异常。id 不存在可以抛异常。
         if(user.getEducationList().size() == 0){
             throw new UserEducationsIsNotExistException("此用户没有教育经历！");
         }

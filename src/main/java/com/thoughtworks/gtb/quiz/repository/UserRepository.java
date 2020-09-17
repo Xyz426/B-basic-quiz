@@ -25,6 +25,7 @@ public class UserRepository {
                         .userId(1).build());
     }
     public User getUserById(int id){
+        // GTB: - id 跟 users.size() 不应该有关系！
         if(users.size() < id)
             return null;
         return users.get(id - 1);
@@ -32,6 +33,7 @@ public class UserRepository {
 
     public User addUser(User user) {
         user.setId((long) (users.size() + 1));
+        // GTB: - 初始化操作可以让 user 自己实现
         user.setEducationList(new ArrayList<>());
         users.add(user);
         return user;
