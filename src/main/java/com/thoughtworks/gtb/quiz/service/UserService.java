@@ -2,43 +2,45 @@ package com.thoughtworks.gtb.quiz.service;
 
 import com.thoughtworks.gtb.quiz.domain.Education;
 import com.thoughtworks.gtb.quiz.domain.User;
-import com.thoughtworks.gtb.quiz.exception.UserEducationsIsNotExistException;
 import com.thoughtworks.gtb.quiz.exception.UserIsNotExistException;
+import com.thoughtworks.gtb.quiz.repository.EducationRepository;
 import com.thoughtworks.gtb.quiz.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final EducationRepository educationRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, EducationRepository educationRepository) {
         this.userRepository = userRepository;
+        this.educationRepository = educationRepository;
     }
 
     public User getUserById(int id){
-        User user = userRepository.getUserById(id);
-        if(user == null){
+        Optional<User> user = userRepository.findUserById((long) id);
+        if(!user.isPresent()){
             throw new UserIsNotExistException("此用户不存在");
         }
-        return user;
+        return user.get();
     }
 
     public List<Education> getEducationsByUserId(int id) {
-        User user = getUserById(id);
-        if(user.getEducationList().size() == 0){
-            throw new UserEducationsIsNotExistException("此用户没有教育经历！");
-        }
-        return user.getEducationList();
+        List<Education> educations = educationRepository.findAllByUser(userRepository.getOne((long) id));
+
+        return educations;
     }
 
     public User addUser(User user) {
-        return userRepository.addUser(user);
+        return userRepository.save(user);
     }
 
     public Education addUserEducation(int id, Education education) {
-        getUserById(id);
-        return userRepository.addUserEducation(id,education);
+        education.setUser(getUserById(id));
+
+        return educationRepository.save(education);
     }
 }
