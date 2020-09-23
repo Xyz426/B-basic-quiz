@@ -23,7 +23,7 @@ public class UserService {
     public User getUserById(int id){
         Optional<User> user = userRepository.findUserById((long) id);
         if(!user.isPresent()){
-            throw new UserIsNotExistException("此用户不存在");
+            throw new UserIsNotExistException("User Not Found");
         }
         return user.get();
     }
