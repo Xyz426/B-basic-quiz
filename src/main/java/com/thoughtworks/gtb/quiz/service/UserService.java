@@ -29,9 +29,7 @@ public class UserService {
     }
 
     public List<Education> getEducationsByUserId(int id) {
-        List<Education> educations = educationRepository.findAllByUser(userRepository.getOne((long) id));
-
-        return educations;
+        return educationRepository.findAllByUserId(id);
     }
 
     public User addUser(User user) {
